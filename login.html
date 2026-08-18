@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CZ TOUR BD - Login</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #080808;
+            color: white;
+            font-family: Arial, sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            width: 92%;
+            max-width: 400px;
+            background: #151515;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff2020;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 12px;
+
+            background: #090909;
+            color: white;
+
+            border: 1px solid #333;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #ff2020;
+            color: white;
+
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .back {
+            background: transparent;
+            border: 1px solid #ff2020;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 18px;
+            color: #ddd;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+    <h1>🔥 CZ TOUR BD</h1>
+
+    <input
+        id="email"
+        type="email"
+        placeholder="Enter Email"
+    >
+
+    <input
+        id="password"
+        type="password"
+        placeholder="Enter Password"
+    >
+
+    <button id="registerBtn">
+        CREATE ACCOUNT
+    </button>
+
+    <button id="loginBtn">
+        LOGIN
+    </button>
+
+    <button
+        class="back"
+        onclick="location.href='index.html'"
+    >
+        ← BACK HOME
+    </button>
+
+    <p id="message"></p>
+
+</div>
+
+
+<script type="module">
+
+import { auth } from "./database.js";
+
+import {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+
+const email =
+    document.getElementById("email");
+
+const password =
+    document.getElementById("password");
+
+const message =
+    document.getElementById("message");
+
+
+document
+    .getElementById("registerBtn")
+    .addEventListener("click", async () => {
+
+        if (!email.value || !password.value) {
+
+            message.textContent =
+                "❌ Email এবং Password দিন।";
+
+            return;
+        }
+
+        try {
+
+            await createUserWithEmailAndPassword(
+                auth,
+                email.value,
+                password.value
+            );
+
+            message.textContent =
+                "✅ Account তৈরি হয়েছে!";
+
+            setTimeout(() => {
+
+                location.href = "index.html";
+
+            }, 1000);
+
+        } catch (error) {
+
+            if (error.code ===
+                "auth/email-already-in-use") {
+
+                message.textContent =
+                    "❌ এই Email দিয়ে আগে থেকেই Account আছে।";
+
+            } else if (
+                error.code ===
+                "auth/weak-password"
+            ) {
+
+                message.textContent =
+                    "❌ Password কমপক্ষে 6 characters হতে হবে।";
+
+            } else {
+
+                message.textContent =
+                    "❌ " + error.message;
+
+            }
+
+        }
+
+    });
+
+
+document
+    .getElementById("loginBtn")
+    .addEventListener("click", async () => {
+
+        if (!email.value || !password.value) {
+
+            message.textContent =
+                "❌ Email এবং Password দিন।";
+
+            return;
+        }
+
+        try {
+
+            await signInWithEmailAndPassword(
+                auth,
+                email.value,
+                password.value
+            );
+
+            message.textContent =
+                "✅ Login সফল হয়েছে!";
+
+            setTimeout(() => {
+
+                location.href = "index.html";
+
+            }, 1000);
+
+        } catch (error) {
+
+            message.textContent =
+                "❌ Email অথবা Password ভুল।";
+
+        }
+
+    });
+
+</script>
+
+</body>
+
+</html>

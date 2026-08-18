@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CZ TOUR BD</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #080808;
+            color: white;
+        }
+
+        header {
+            padding: 18px;
+            text-align: center;
+            background: #111;
+            border-bottom: 2px solid #ff2020;
+        }
+
+        header h1 {
+            color: #ff2020;
+        }
+
+        header p {
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        .hero {
+            padding: 50px 20px;
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #280000,
+                    #111,
+                    #00150d
+                );
+        }
+
+        .hero h2 {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .hero span {
+            color: #ff2020;
+        }
+
+        .hero p {
+            color: #ccc;
+            margin-bottom: 22px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 25px;
+
+            background: #ff2020;
+            color: white;
+
+            text-decoration: none;
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+        .section-title {
+            padding: 25px 15px 10px;
+        }
+
+        .card {
+            margin: 15px;
+            padding: 20px;
+
+            background: #151515;
+
+            border: 1px solid #292929;
+            border-radius: 14px;
+        }
+
+        .card h3 {
+            color: #ff3030;
+            margin-bottom: 15px;
+        }
+
+        .info {
+            display: flex;
+            justify-content: space-between;
+
+            margin: 11px 0;
+
+            color: #ccc;
+        }
+
+        .join {
+            width: 100%;
+
+            margin-top: 15px;
+            padding: 13px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #ff2020;
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .login {
+            width: 100%;
+
+            margin-top: 10px;
+            padding: 13px;
+
+            border: 1px solid #ff2020;
+            border-radius: 8px;
+
+            background: transparent;
+            color: white;
+
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 30px;
+            padding: 22px;
+
+            text-align: center;
+
+            color: #777;
+            background: #111;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>🔥 CZ TOUR BD</h1>
+
+    <p>
+        Free Fire Tournament Platform
+    </p>
+
+</header>
+
+
+
+<section class="hero">
+
+    <h2>
+        Welcome to
+        <span>CZ TOUR BD</span>
+    </h2>
+
+    <p>
+        Join Free Fire tournaments
+        and compete for prizes.
+    </p>
+
+    <a
+        href="#tournaments"
+        class="btn"
+    >
+        🏆 View Tournaments
+    </a>
+
+</section>
+
+
+
+<h2
+    class="section-title"
+    id="tournaments"
+>
+
+    🏆 Available Tournaments
+
+</h2>
+
+
+
+<div class="card">
+
+    <h3>
+        🔥 Free Fire Battle #01
+    </h3>
+
+
+    <div class="info">
+
+        <span>
+            Entry Fee
+        </span>
+
+        <strong>
+            ৳50
+        </strong>
+
+    </div>
+
+
+    <div class="info">
+
+        <span>
+            🥇 1st Prize
+        </span>
+
+        <strong>
+            ৳1000
+        </strong>
+
+    </div>
+
+
+    <div class="info">
+
+        <span>
+            🥈 2nd Prize
+        </span>
+
+        <strong>
+            ৳500
+        </strong>
+
+    </div>
+
+
+    <div class="info">
+
+        <span>
+            🥉 3rd Prize
+        </span>
+
+        <strong>
+            ৳250
+        </strong>
+
+    </div>
+
+
+    <div class="info">
+
+        <span>
+            Status
+        </span>
+
+        <strong>
+            Open
+        </strong>
+
+    </div>
+
+
+    <button
+        class="join"
+        onclick="joinTournament()"
+    >
+        🏆 JOIN TOURNAMENT
+    </button>
+
+
+    <button
+        class="login"
+        onclick="goLogin()"
+    >
+        🔐 LOGIN / REGISTER
+    </button>
+
+</div>
+
+
+
+<footer>
+
+    © 2026 CZ TOUR BD
+
+</footer>
+
+
+
+<script>
+
+function goLogin() {
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+function joinTournament() {
+
+    window.location.href =
+        "login.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>
