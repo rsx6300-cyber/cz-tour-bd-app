@@ -111,7 +111,7 @@
 
     <button
         class="back"
-        onclick="location.href='index.html'"
+        onclick="window.location.href='index.html'"
     >
         ← BACK HOME
     </button>
@@ -141,6 +141,9 @@ const message =
     document.getElementById("message");
 
 
+
+/* CREATE ACCOUNT */
+
 document
     .getElementById("registerBtn")
     .addEventListener("click", async () => {
@@ -166,19 +169,27 @@ document
 
             setTimeout(() => {
 
-                location.href = "index.html";
+                window.location.replace(
+                    "./index.html"
+                );
 
             }, 1000);
 
-        } catch (error) {
+        }
 
-            if (error.code ===
-                "auth/email-already-in-use") {
+        catch (error) {
+
+            if (
+                error.code ===
+                "auth/email-already-in-use"
+            ) {
 
                 message.textContent =
                     "❌ এই Email দিয়ে আগে থেকেই Account আছে।";
 
-            } else if (
+            }
+
+            else if (
                 error.code ===
                 "auth/weak-password"
             ) {
@@ -186,7 +197,9 @@ document
                 message.textContent =
                     "❌ Password কমপক্ষে 6 characters হতে হবে।";
 
-            } else {
+            }
+
+            else {
 
                 message.textContent =
                     "❌ " + error.message;
@@ -197,6 +210,9 @@ document
 
     });
 
+
+
+/* LOGIN */
 
 document
     .getElementById("loginBtn")
@@ -223,11 +239,15 @@ document
 
             setTimeout(() => {
 
-                location.href = "index.html";
+                window.location.replace(
+                    "./index.html"
+                );
 
             }, 1000);
 
-        } catch (error) {
+        }
+
+        catch (error) {
 
             message.textContent =
                 "❌ Email অথবা Password ভুল।";
