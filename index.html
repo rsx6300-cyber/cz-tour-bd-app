@@ -2,13 +2,8 @@
 <html lang="bn">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>CZ TOUR BD</title>
 
@@ -45,14 +40,12 @@
         .hero {
             padding: 50px 20px;
             text-align: center;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #280000,
-                    #111,
-                    #00150d
-                );
+            background: linear-gradient(
+                135deg,
+                #280000,
+                #111,
+                #00150d
+            );
         }
 
         .hero h2 {
@@ -72,13 +65,10 @@
         .btn {
             display: inline-block;
             padding: 13px 25px;
-
             background: #ff2020;
             color: white;
-
             text-decoration: none;
             border-radius: 8px;
-
             font-weight: bold;
         }
 
@@ -89,9 +79,7 @@
         .card {
             margin: 15px;
             padding: 20px;
-
             background: #151515;
-
             border: 1px solid #292929;
             border-radius: 14px;
         }
@@ -104,49 +92,47 @@
         .info {
             display: flex;
             justify-content: space-between;
-
             margin: 11px 0;
-
             color: #ccc;
+        }
+
+        button {
+            cursor: pointer;
         }
 
         .join {
             width: 100%;
-
             margin-top: 15px;
             padding: 13px;
-
             border: none;
             border-radius: 8px;
-
             background: #ff2020;
             color: white;
-
             font-size: 16px;
             font-weight: bold;
         }
 
         .login {
             width: 100%;
-
             margin-top: 10px;
             padding: 13px;
-
             border: 1px solid #ff2020;
             border-radius: 8px;
-
             background: transparent;
             color: white;
-
             font-weight: bold;
+        }
+
+        #message {
+            text-align: center;
+            margin: 18px 15px;
+            color: #ddd;
         }
 
         footer {
             margin-top: 30px;
             padding: 22px;
-
             text-align: center;
-
             color: #777;
             background: #111;
         }
@@ -154,7 +140,6 @@
     </style>
 
 </head>
-
 
 <body>
 
@@ -170,39 +155,26 @@
 </header>
 
 
-
 <section class="hero">
 
     <h2>
-        Welcome to
-        <span>CZ TOUR BD</span>
+        Welcome to <span>CZ TOUR BD</span>
     </h2>
 
     <p>
-        Join Free Fire tournaments
-        and compete for prizes.
+        Join Free Fire tournaments and compete.
     </p>
 
-    <a
-        href="#tournaments"
-        class="btn"
-    >
+    <a href="#tournaments" class="btn">
         🏆 View Tournaments
     </a>
 
 </section>
 
 
-
-<h2
-    class="section-title"
-    id="tournaments"
->
-
+<h2 class="section-title" id="tournaments">
     🏆 Available Tournaments
-
 </h2>
-
 
 
 <div class="card">
@@ -211,69 +183,29 @@
         🔥 Free Fire Battle #01
     </h3>
 
-
     <div class="info">
-
-        <span>
-            Entry Fee
-        </span>
-
-        <strong>
-            ৳50
-        </strong>
-
+        <span>Entry Fee</span>
+        <strong>৳50</strong>
     </div>
 
-
     <div class="info">
-
-        <span>
-            🥇 1st Prize
-        </span>
-
-        <strong>
-            ৳1000
-        </strong>
-
+        <span>🥇 1st Prize</span>
+        <strong>৳1000</strong>
     </div>
 
-
     <div class="info">
-
-        <span>
-            🥈 2nd Prize
-        </span>
-
-        <strong>
-            ৳500
-        </strong>
-
+        <span>🥈 2nd Prize</span>
+        <strong>৳500</strong>
     </div>
 
-
     <div class="info">
-
-        <span>
-            🥉 3rd Prize
-        </span>
-
-        <strong>
-            ৳250
-        </strong>
-
+        <span>🥉 3rd Prize</span>
+        <strong>৳250</strong>
     </div>
 
-
     <div class="info">
-
-        <span>
-            Status
-        </span>
-
-        <strong>
-            Open
-        </strong>
-
+        <span>Status</span>
+        <strong>Open</strong>
     </div>
 
 
@@ -295,31 +227,100 @@
 </div>
 
 
+<p id="message"></p>
+
 
 <footer>
-
     © 2026 CZ TOUR BD
-
 </footer>
 
 
+<script type="module">
 
-<script>
+import { auth } from "./database.js";
 
-function goLogin() {
+import {
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
-    window.location.href =
-        "login.html";
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
-}
+
+const db = getFirestore(auth.app);
+
+let currentUser = null;
 
 
-function joinTournament() {
+onAuthStateChanged(auth, (user) => {
 
-    window.location.href =
-        "login.html";
+    currentUser = user;
 
-}
+});
+
+
+window.goLogin = function () {
+
+    window.location.href = "login.html";
+
+};
+
+
+window.joinTournament = async function () {
+
+    const message =
+        document.getElementById("message");
+
+
+    if (!currentUser) {
+
+        message.textContent =
+            "🔐 আগে Login / Register করুন।";
+
+        setTimeout(() => {
+
+            window.location.href =
+                "login.html";
+
+        }, 1000);
+
+        return;
+    }
+
+
+    try {
+
+        await addDoc(
+            collection(db, "tournamentJoins"),
+            {
+                tournamentId: "battle-01",
+                tournamentName: "Free Fire Battle #01",
+                userId: currentUser.uid,
+                email: currentUser.email,
+                joinedAt: serverTimestamp()
+            }
+        );
+
+
+        message.textContent =
+            "✅ Tournament-এ সফলভাবে Join করেছেন!";
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        message.textContent =
+            "❌ Join করা যায়নি। আবার চেষ্টা করুন।";
+
+    }
+
+};
 
 </script>
 
